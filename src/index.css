@@ -11,6 +11,8 @@
   --muted: #b7c5d6;
   --accent: #2dd4bf;
   --accent-strong: #0f9f91;
+  --button-radius: 0.625rem;
+  --button-focus: 0 0 0 3px rgb(45 212 191 / 28%);
 }
 
 @layer base {
@@ -110,7 +112,7 @@
 [class~="text-red-800"],
 [class~="text-red-900"] { color: #2dd4bf !important; }
 
-/* Teal primary actions replace the old red buttons. */
+/* Preserve the existing teal primary-action palette. */
 [class~="bg-red-600"],
 [class~="bg-red-700"],
 [class~="bg-red-800"],
@@ -124,21 +126,73 @@
 [class~="border-rose-700"] { border-color: #2dd4bf !important; }
 [class~="selection:bg-red-700"] { --tw-selection-bg: #0f766e; }
 
+/* Shared button foundation: consistent shape, alignment, feedback, and accessibility. */
 button, [role="button"] {
-  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    box-shadow 160ms ease,
+    filter 160ms ease,
+    transform 160ms ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
-button:hover:not(:disabled) {
+button {
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: var(--button-radius);
+  font-weight: 600;
+  line-height: 1.25;
+  cursor: pointer;
+}
+
+button:focus-visible, [role="button"]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  box-shadow: var(--button-focus);
+}
+
+button:hover:not(:disabled), [role="button"]:hover {
   filter: brightness(1.08);
 }
 
-button:active:not(:disabled) {
+button:active:not(:disabled), [role="button"]:active {
   transform: translateY(1px);
 }
 
-button:disabled {
+button:disabled, button[aria-disabled="true"], [role="button"][aria-disabled="true"] {
   cursor: not-allowed;
   opacity: 0.55;
+  filter: none;
+  transform: none;
+}
+
+/* Optional semantic variants for components that expose data-variant. */
+button[data-variant="secondary"] {
+  background-color: var(--surface-raised);
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+
+button[data-variant="outline"] {
+  background-color: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent-strong);
+}
+
+button[data-variant="destructive"], button[data-variant="danger"] {
+  background-color: #b42336;
+  color: #ffffff;
+  border: 1px solid #e5484d;
+}
+
+button[data-variant="secondary"]:hover:not(:disabled),
+button[data-variant="outline"]:hover:not(:disabled),
+button[data-variant="destructive"]:hover:not(:disabled),
+button[data-variant="danger"]:hover:not(:disabled) {
+  filter: brightness(1.12);
 }
 
 input, textarea, select {

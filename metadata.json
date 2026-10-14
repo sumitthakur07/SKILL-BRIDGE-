@@ -1,0 +1,6 @@
+{
+  "name": "MatchPoint Internships",
+  "description": "Student internship discovery and application platform matching verified opportunities with student skills and location preferences.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

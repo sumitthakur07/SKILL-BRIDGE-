@@ -1,7 +1,167 @@
 @import "tailwindcss";
 
+/* MatchPoint visual refresh: midnight navy, teal accents, and readable Roman-script typography. */
+:root {
+  color-scheme: dark;
+  --page: #0b1220;
+  --surface: #121e30;
+  --surface-raised: #19283d;
+  --line: #2b3c53;
+  --ink: #f1f5f9;
+  --muted: #b7c5d6;
+  --accent: #2dd4bf;
+  --accent-strong: #0f9f91;
+}
+
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    background: var(--page);
+  }
+
   body {
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    min-width: 320px;
+    background: var(--page);
+    color: var(--ink);
+    font-family: 'Inter', 'Lato', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-feature-settings: "ss01" on;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Lora', Georgia, 'Times New Roman', serif;
+    letter-spacing: -0.025em;
+  }
+
+  button, input, textarea, select {
+    font: inherit;
+  }
+
+  button, a, input, textarea, select {
+    outline-offset: 3px;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+  }
+
+  ::selection {
+    background: #0f766e;
+    color: #ffffff;
+  }
+}
+
+/* Replace the previous burgundy surfaces with a consistent navy palette. */
+[class~="bg-[#180306]"] { background-color: var(--page) !important; }
+[class~="bg-[#1b0407]"],
+[class~="bg-[#1c0407]"],
+[class~="bg-[#1e0407]"],
+[class~="bg-[#1f0407]"],
+[class~="bg-[#200508]"],
+[class~="bg-[#24060a]"],
+[class~="bg-[#28070b]"],
+[class~="bg-[#30080e]"] { background-color: var(--surface) !important; }
+[class~="bg-[#2c060b]"],
+[class~="bg-[#32080e]"],
+[class~="bg-[#34090e]"],
+[class~="bg-[#34090f]"],
+[class~="bg-[#340a10]"],
+[class~="bg-[#38090f]"],
+[class~="bg-[#380b12]"],
+[class~="bg-[#390810]"],
+[class~="bg-[#3b0c13]"],
+[class~="bg-[#3d0b13]"],
+[class~="bg-[#430d15]"],
+[class~="bg-[#4d0d17]"] { background-color: var(--surface-raised) !important; }
+
+[class~="border-[#24060a]"],
+[class~="border-[#400c15]"],
+[class~="border-[#440c15]"],
+[class~="border-[#4a0d16]"],
+[class~="border-[#4d0d17]"],
+[class~="border-[#520f1a]"],
+[class~="border-[#540f1a]"],
+[class~="border-[#5a111c]"],
+[class~="border-[#5c131f]"],
+[class~="border-[#6b1320]"] { border-color: var(--line) !important; }
+
+[class~="from-[#3f0a12]"] { --tw-gradient-from: #172b40 var(--tw-gradient-from-position) !important; }
+[class~="via-[#2c060b]"] { --tw-gradient-via: #101d30 var(--tw-gradient-via-position) !important; }
+[class~="from-[#180306]"] { --tw-gradient-from: var(--page) var(--tw-gradient-from-position) !important; }
+[class~="via-[#180306]"] { --tw-gradient-via: var(--page) var(--tw-gradient-via-position) !important; }
+[class~="to-[#180306]"] { --tw-gradient-to: var(--page) var(--tw-gradient-to-position) !important; }
+[class~="from-[#38090f]"] { --tw-gradient-from: #172b40 var(--tw-gradient-from-position) !important; }
+[class~="to-[#24060a]"] { --tw-gradient-to: var(--surface) var(--tw-gradient-to-position) !important; }
+
+/* Cool, high-contrast text in place of the old rose palette. */
+[class~="text-rose-50"],
+[class~="text-rose-100"],
+[class~="text-white"] { color: var(--ink) !important; }
+[class~="text-rose-200"] { color: #d7e4ef !important; }
+[class~="text-rose-300"],
+[class~="text-rose-300/70"] { color: var(--muted) !important; }
+[class~="text-rose-400"] { color: #8fa6bf !important; }
+[class~="text-red-300"],
+[class~="text-red-400"],
+[class~="text-red-500"],
+[class~="text-red-600"] { color: #5eead4 !important; }
+[class~="text-red-700"],
+[class~="text-red-800"],
+[class~="text-red-900"] { color: #2dd4bf !important; }
+
+/* Teal primary actions replace the old red buttons. */
+[class~="bg-red-600"],
+[class~="bg-red-700"],
+[class~="bg-red-800"],
+[class~="bg-red-900"],
+[class~="bg-rose-600"],
+[class~="bg-rose-700"],
+[class~="bg-rose-800"] { background-color: #0f9f91 !important; color: #ffffff !important; }
+[class~="border-red-600"],
+[class~="border-red-700"],
+[class~="border-red-800"],
+[class~="border-rose-700"] { border-color: #2dd4bf !important; }
+[class~="selection:bg-red-700"] { --tw-selection-bg: #0f766e; }
+
+button, [role="button"] {
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+button:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+input, textarea, select {
+  color: var(--ink);
+}
+
+input::placeholder, textarea::placeholder {
+  color: #8fa6bf;
+}
+
+main {
+  width: 100%;
+}
+
+footer {
+  border-color: var(--line) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }
